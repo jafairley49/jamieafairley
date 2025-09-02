@@ -7,9 +7,15 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
   <!-- Highlight.js for syntax highlighting -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css" id="theme-css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
-  <script>hljs.highlightAll();</script>
+
+  <!-- Additional language support -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/python.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/java.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/cpp.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/sql.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/bash.min.js"></script>
 
   <!-- html2canvas for exporting as PNG -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
@@ -231,26 +237,53 @@
     }
 
     .main-content {
-      max-width: 900px;
+      max-width: 1200px;
       margin: 0 auto;
-      text-align: center;
-      padding: 0 2rem;
+      padding: 0 1rem;
+    }
+
+    .code-editor {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .input-panel,
+    .preview-panel {
+      background: rgba(255, 255, 255, 0.03);
+      border-radius: 8px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      padding: 1rem;
+      backdrop-filter: blur(10px);
+    }
+
+    .panel-title {
+      color: #ffffff;
+      font-size: 0.9rem;
+      font-weight: 600;
+      margin-bottom: 0.75rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      opacity: 0.9;
     }
     textarea {
       width: 100%;
-      height: 250px;
+      height: 350px;
       font-family: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
-      font-size: 0.95rem;
-      padding: 1.5rem;
-      background: rgba(79, 93, 117, 0.1);
-      border: 2px solid rgba(191, 192, 192, 0.2);
-      border-radius: 12px;
+      font-size: 0.85rem;
+      padding: 1rem;
+      background: rgba(0, 0, 0, 0.3);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 6px;
       box-sizing: border-box;
-      margin-bottom: 2rem;
-      resize: vertical;
+      resize: none;
       color: #ffffff;
-      line-height: 1.6;
-      transition: all 0.3s ease;
+      line-height: 1.5;
+      transition: all 0.2s ease;
     }
 
     textarea:focus {
@@ -269,66 +302,70 @@
     }
 
     .controls {
-      display: flex;
-      gap: 1rem;
-      margin-bottom: 1rem;
-      flex-wrap: wrap;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.75rem;
+      margin-bottom: 0.75rem;
     }
 
     .language-selector,
     .theme-selector {
       display: flex;
       flex-direction: column;
-      gap: 0.5rem;
+      gap: 0.25rem;
     }
 
     .controls label {
       color: #bfc0c0;
-      font-size: 0.9rem;
+      font-size: 0.75rem;
       font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
     }
 
     .controls select {
-      background: rgba(255, 255, 255, 0.05);
+      background: rgba(0, 0, 0, 0.4);
       border: 1px solid rgba(255, 255, 255, 0.1);
-      border-radius: 6px;
+      border-radius: 4px;
       padding: 0.5rem;
       color: #ffffff;
-      font-size: 0.9rem;
-      min-width: 120px;
+      font-size: 0.8rem;
+      font-family: inherit;
     }
 
     .controls select:focus {
       outline: none;
       border-color: #ef8354;
-      box-shadow: 0 0 0 2px rgba(239, 131, 84, 0.2);
+      box-shadow: 0 0 0 1px rgba(239, 131, 84, 0.3);
     }
 
     .controls select option {
-      background: #2a2d3a;
+      background: #1a1d2e;
       color: #ffffff;
     }
 
     .button-group {
       display: flex;
-      gap: 1rem;
+      gap: 0.75rem;
       justify-content: center;
-      margin-bottom: 2rem;
+      margin: 1.5rem 0;
       flex-wrap: wrap;
+      grid-column: 1 / -1;
     }
 
     button {
-      padding: 1rem 2rem;
+      padding: 0.75rem 1.5rem;
       background: linear-gradient(135deg, #ef8354 0%, #e6744a 100%);
       color: #ffffff;
       border: none;
-      border-radius: 12px;
+      border-radius: 6px;
       cursor: pointer;
-      font-size: 1rem;
+      font-size: 0.85rem;
       font-weight: 600;
-      transition: all 0.3s ease;
-      box-shadow: 0 4px 20px rgba(239, 131, 84, 0.3);
-      border: 1px solid rgba(239, 131, 84, 0.3);
+      transition: all 0.2s ease;
+      box-shadow: 0 2px 8px rgba(239, 131, 84, 0.3);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
     }
 
     button:hover {
@@ -341,36 +378,66 @@
       transform: translateY(-1px);
     }
 
+    .preview-panel {
+      display: flex;
+      flex-direction: column;
+    }
+
     #preview {
-      margin-top: 2rem;
-      display: none;
+      display: block;
+      flex: 1;
+      height: 350px;
+      overflow: hidden;
+    }
+
+    .preview-placeholder {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 350px;
+      color: #666;
+      font-style: italic;
+      border: 2px dashed rgba(255, 255, 255, 0.1);
+      border-radius: 8px;
+    }
+
+    /* Theme Variables */
+    :root {
+      --code-bg: #1e1e1e;
+      --code-header-bg: #2d2d2d;
+      --code-border: rgba(255, 255, 255, 0.1);
+      --code-text: #ffffff;
     }
 
     #codeContainer {
-      background: #1e1e1e;
-      border-radius: 12px;
+      background: var(--code-bg);
+      border-radius: 8px;
       overflow: hidden;
-      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
-      border: 1px solid rgba(255, 255, 255, 0.1);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+      border: 1px solid var(--code-border);
+      transition: all 0.3s ease;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
     }
 
     .code-header {
-      background: #2d2d2d;
-      padding: 0.75rem 1rem;
+      background: var(--code-header-bg);
+      padding: 0.5rem 0.75rem;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      border-bottom: 1px solid var(--code-border);
     }
 
     .window-controls {
       display: flex;
-      gap: 0.5rem;
+      gap: 0.4rem;
     }
 
     .control {
-      width: 12px;
-      height: 12px;
+      width: 10px;
+      height: 10px;
       border-radius: 50%;
       display: block;
     }
@@ -389,23 +456,63 @@
 
     .filename {
       color: #bfc0c0;
-      font-size: 0.85rem;
+      font-size: 0.75rem;
       font-weight: 500;
+      font-family: 'JetBrains Mono', monospace;
     }
 
     #preview pre {
       margin: 0;
       background: transparent;
       border: none;
-      padding: 1.5rem;
-      overflow-x: auto;
+      padding: 1rem;
+      overflow: auto;
+      flex: 1;
+      height: 100%;
     }
 
     #preview code {
       font-family: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
-      font-size: 0.9rem;
-      line-height: 1.6;
+      font-size: 0.8rem;
+      line-height: 1.4;
       background: transparent;
+      color: var(--code-text);
+    }
+
+    /* Custom Theme Styles */
+    .theme-github-dark {
+      --code-bg: #0d1117;
+      --code-header-bg: #161b22;
+      --code-border: #30363d;
+      --code-text: #e6edf3;
+    }
+
+    .theme-monokai {
+      --code-bg: #272822;
+      --code-header-bg: #1e1f1c;
+      --code-border: #49483e;
+      --code-text: #f8f8f2;
+    }
+
+    .theme-atom-one-dark {
+      --code-bg: #282c34;
+      --code-header-bg: #21252b;
+      --code-border: #3e4451;
+      --code-text: #abb2bf;
+    }
+
+    .theme-vs2015 {
+      --code-bg: #1e1e1e;
+      --code-header-bg: #2d2d30;
+      --code-border: #3f3f46;
+      --code-text: #dcdcdc;
+    }
+
+    .theme-rainbow {
+      --code-bg: #2d2d2d;
+      --code-header-bg: #1a1a1a;
+      --code-border: #444444;
+      --code-text: #ffffff;
     }
 
     footer {
@@ -470,6 +577,24 @@
 
       .main-content {
         padding: 0 1.5rem;
+      }
+
+      .code-editor {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+      }
+
+      .panel-title {
+        font-size: 1rem;
+      }
+
+      textarea {
+        height: 300px;
+      }
+
+      .controls {
+        flex-direction: column;
+        gap: 0.75rem;
       }
 
       .button-group {
@@ -538,55 +663,64 @@
       <main>
         <div class="container">
           <div class="main-content">
-            <div class="input-section">
-              <textarea id="codeInput" placeholder="Paste your code here..."></textarea>
-
-              <div class="controls">
-                <div class="language-selector">
-                  <label for="languageSelect">Language:</label>
-                  <select id="languageSelect">
-                    <option value="javascript">JavaScript</option>
-                    <option value="python">Python</option>
-                    <option value="java">Java</option>
-                    <option value="cpp">C++</option>
-                    <option value="html">HTML</option>
-                    <option value="css">CSS</option>
-                    <option value="json">JSON</option>
-                    <option value="xml">XML</option>
-                    <option value="sql">SQL</option>
-                    <option value="bash">Bash</option>
-                  </select>
+            <div class="code-editor">
+              <!-- Input Panel -->
+              <div class="input-panel">
+                <div class="panel-title">
+                  <span>📝</span>
+                  Code Input
                 </div>
 
-                <div class="theme-selector">
-                  <label for="themeSelect">Theme:</label>
-                  <select id="themeSelect">
-                    <option value="github-dark">GitHub Dark</option>
-                    <option value="monokai">Monokai</option>
-                    <option value="atom-one-dark">Atom One Dark</option>
-                    <option value="vs2015">VS 2015</option>
-                    <option value="rainbow">Rainbow</option>
-                  </select>
+                <div class="controls">
+                  <div class="language-selector">
+                    <label for="languageSelect">Language:</label>
+                    <select id="languageSelect">
+                      <option value="javascript">JavaScript</option>
+                      <option value="python">Python</option>
+                      <option value="java">Java</option>
+                      <option value="cpp">C++</option>
+                      <option value="html">HTML</option>
+                      <option value="css">CSS</option>
+                      <option value="json">JSON</option>
+                      <option value="xml">XML</option>
+                      <option value="sql">SQL</option>
+                      <option value="bash">Bash</option>
+                    </select>
+                  </div>
+
+                  <div class="theme-selector">
+                    <label for="themeSelect">Theme:</label>
+                    <select id="themeSelect">
+                      <option value="github-dark">GitHub Dark</option>
+                      <option value="monokai">Monokai</option>
+                      <option value="atom-one-dark">Atom One Dark</option>
+                      <option value="vs2015">VS 2015</option>
+                      <option value="rainbow">Rainbow</option>
+                    </select>
+                  </div>
+                </div>
+
+                <textarea id="codeInput" placeholder="Paste your code here..."></textarea>
+              </div>
+
+              <!-- Preview Panel -->
+              <div class="preview-panel">
+                <div class="panel-title">
+                  <span>👁️</span>
+                  Live Preview
+                </div>
+
+                <div id="preview">
+                  <div class="preview-placeholder">
+                    Enter code and click "Preview Code" to see the result
+                  </div>
                 </div>
               </div>
-            </div>
 
-            <div class="button-group">
-              <button onclick="renderCode()">🎨 Preview Code</button>
-              <button onclick="downloadImage()">📥 Download as PNG</button>
-            </div>
-
-            <div id="preview" style="display: none;">
-              <div id="codeContainer">
-                <div class="code-header">
-                  <div class="window-controls">
-                    <span class="control red"></span>
-                    <span class="control yellow"></span>
-                    <span class="control green"></span>
-                  </div>
-                  <div class="filename" id="filename">code.js</div>
-                </div>
-                <pre><code id="codeBlock" class="language-javascript"></code></pre>
+              <!-- Button Group -->
+              <div class="button-group">
+                <button onclick="renderCode()">🎨 Preview Code</button>
+                <button onclick="downloadImage()">📥 Download as PNG</button>
               </div>
             </div>
           </div>
@@ -613,6 +747,10 @@
         <a href="resume.html">
           <span class="icon">📄</span>
           <span class="text">Resume</span>
+        </a>
+        <a href="https://a22c9-service-17580839-d99cf792.us.monday.app/board-view.html" target="_blank">
+          <span class="icon">📋</span>
+          <span class="text">Board Mates</span>
         </a>
         <a href="prettier.html" class="active">
           <span class="icon">🎨</span>
@@ -650,23 +788,25 @@
       const themeSelect = document.getElementById('themeSelect');
       const selectedTheme = themeSelect.value;
 
-      // Remove existing theme
-      const existingTheme = document.querySelector('link[data-theme]');
-      if (existingTheme) {
-        existingTheme.remove();
-      }
+      // Update the existing theme link for syntax highlighting
+      const themeLink = document.getElementById('theme-css');
+      themeLink.href = themes[selectedTheme];
 
-      // Add new theme
-      const link = document.createElement('link');
-      link.rel = 'stylesheet';
-      link.href = themes[selectedTheme];
-      link.setAttribute('data-theme', selectedTheme);
-      document.head.appendChild(link);
+      // Apply custom theme class to code container
+      const codeContainer = document.getElementById('codeContainer');
+      if (codeContainer) {
+        // Remove existing theme classes
+        codeContainer.className = codeContainer.className.replace(/theme-\w+/g, '');
+        // Add new theme class
+        codeContainer.classList.add(`theme-${selectedTheme.replace('-', '')}`);
+      }
 
       // Re-highlight if code is already rendered
       const codeBlock = document.getElementById('codeBlock');
-      if (codeBlock.textContent.trim()) {
-        hljs.highlightElement(codeBlock);
+      if (codeBlock && codeBlock.textContent.trim()) {
+        setTimeout(() => {
+          hljs.highlightElement(codeBlock);
+        }, 100); // Small delay to ensure CSS is loaded
       }
     }
 
@@ -679,31 +819,44 @@
 
       const languageSelect = document.getElementById('languageSelect');
       const selectedLanguage = languageSelect.value;
+      const preview = document.getElementById('preview');
+
+      // Create the code container HTML
+      const filename = `code.${extensions[selectedLanguage]}`;
+
+      // Get current theme
+      const themeSelect = document.getElementById('themeSelect');
+      const selectedTheme = themeSelect.value;
+      const themeClass = `theme-${selectedTheme.replace('-', '')}`;
+
+      preview.innerHTML = `
+        <div id="codeContainer" class="${themeClass}">
+          <div class="code-header">
+            <div class="window-controls">
+              <span class="control red"></span>
+              <span class="control yellow"></span>
+              <span class="control green"></span>
+            </div>
+            <div class="filename">${filename}</div>
+          </div>
+          <pre><code id="codeBlock" class="language-${selectedLanguage}"></code></pre>
+        </div>
+      `;
+
+      // Set the code content
       const codeBlock = document.getElementById('codeBlock');
-      const filename = document.getElementById('filename');
-
-      // Update filename
-      filename.textContent = `code.${extensions[selectedLanguage]}`;
-
-      // Update language class
-      codeBlock.className = `language-${selectedLanguage}`;
       codeBlock.textContent = input;
 
       // Apply syntax highlighting
       hljs.highlightElement(codeBlock);
-
-      // Show preview
-      document.getElementById('preview').style.display = 'block';
     }
 
     function downloadImage() {
-      const preview = document.getElementById('preview');
-      if (preview.style.display === 'none') {
+      const codeContainer = document.getElementById('codeContainer');
+      if (!codeContainer) {
         alert('Please preview your code first!');
         return;
       }
-
-      const codeContainer = document.getElementById('codeContainer');
 
       // Configure html2canvas options for better quality
       const options = {
@@ -712,12 +865,13 @@
         useCORS: true,
         allowTaint: true,
         width: codeContainer.offsetWidth,
-        height: codeContainer.offsetHeight
+        height: codeContainer.offsetHeight,
+        logging: false
       };
 
       html2canvas(codeContainer, options).then(canvas => {
         const link = document.createElement('a');
-        const filename = document.getElementById('filename').textContent;
+        const filename = document.querySelector('.filename').textContent;
         link.download = `${filename.split('.')[0]}_code.png`;
         link.href = canvas.toDataURL('image/png', 1.0); // Maximum quality
         link.click();
@@ -727,12 +881,39 @@
       });
     }
 
-    // Event listeners
-    document.getElementById('themeSelect').addEventListener('change', changeTheme);
+    // Auto-preview functionality
+    function autoPreview() {
+      const input = document.getElementById('codeInput').value.trim();
+      if (input) {
+        renderCode();
+      }
+    }
 
-    // Initialize with default theme
+    // Event listeners
+    document.getElementById('themeSelect').addEventListener('change', function() {
+      changeTheme();
+      autoPreview(); // Re-render with new theme
+    });
+
+    document.getElementById('languageSelect').addEventListener('change', autoPreview);
+    document.getElementById('codeInput').addEventListener('input', autoPreview);
+
+    // Initialize with default theme and sample code
     document.addEventListener('DOMContentLoaded', function() {
       changeTheme();
+
+      // Add sample code
+      const codeInput = document.getElementById('codeInput');
+      codeInput.value = `function greetUser(name) {
+  const greeting = \`Hello, \${name}!\`;
+  console.log(greeting);
+  return greeting;
+}
+
+greetUser("World");`;
+
+      // Auto-preview the sample
+      setTimeout(autoPreview, 200);
     });
 
     function toggleNav() {
