@@ -136,6 +136,21 @@
       display: flex;
       flex-direction: column;
       gap: 0.25rem;
+      height: calc(100vh - 5rem);
+      overflow: hidden;
+    }
+
+    .nav-main {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+    }
+
+    .nav-bottom {
+      margin-top: auto;
+      padding-top: 1rem;
+      border-top: 1px solid rgba(79, 93, 117, 0.3);
     }
 
     .nav-title {
@@ -635,11 +650,11 @@
           <!-- Board Mates Section -->
           <section class="feature-section">
             <div class="feature-content">
-              <div class="feature-icon">📋</div>
+              <div class="feature-icon">⚓</div>
               <h2>Board Mates</h2>
               <p class="feature-description">
                 A powerful Monday.com app that enhances team collaboration and project management.
-                Board Mates provides an advanced board view, allowing the streamlining of your Monday.com experience.
+                Board Mates is a board view that you can install on a Monday.com project board, allowing the streamlining of your Monday.com experience.
               </p>
               <div class="feature-highlights">
                 <div class="highlight-item">
@@ -704,22 +719,30 @@
         <span class="text">Navigation</span>
       </div>
       <div class="nav-content">
-        <a href="index.html" class="active">
-          <span class="icon">🏠</span>
-          <span class="text">Home</span>
-        </a>
-        <a href="resume.html">
-          <span class="icon">📄</span>
-          <span class="text">Resume</span>
-        </a>
-        <a href="https://a22c9-service-17580839-d99cf792.us.monday.app/board-view.html" target="_blank">
-          <span class="icon">📋</span>
-          <span class="text">Board Mates</span>
-        </a>
-        <a href="prettier.html">
-          <span class="icon">🎨</span>
-          <span class="text">Code Prettier</span>
-        </a>
+        <div class="nav-main">
+          <a href="index.html" class="active">
+            <span class="icon">🏠</span>
+            <span class="text">Home</span>
+          </a>
+          <a href="resume.html">
+            <span class="icon">📄</span>
+            <span class="text">Resume</span>
+          </a>
+          <a href="https://a22c9-service-17580839-d99cf792.us.monday.app/board-view.html" target="_blank">
+            <span class="icon">⚓</span>
+            <span class="text">Board Mates</span>
+          </a>
+          <a href="prettier.html">
+            <span class="icon">🎨</span>
+            <span class="text">Code Prettier</span>
+          </a>
+        </div>
+        <div class="nav-bottom">
+          <a href="contact.html">
+            <span class="icon">✈️</span>
+            <span class="text">Contact</span>
+          </a>
+        </div>
       </div>
     </nav>
   </div>

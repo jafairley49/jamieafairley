@@ -109,6 +109,21 @@
       display: flex;
       flex-direction: column;
       gap: 0.25rem;
+      height: calc(100vh - 5rem);
+      overflow: hidden;
+    }
+
+    .nav-main {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+    }
+
+    .nav-bottom {
+      margin-top: auto;
+      padding-top: 1rem;
+      border-top: 1px solid rgba(79, 93, 117, 0.3);
     }
 
     .nav-title {
@@ -251,11 +266,247 @@
       border: 1px solid rgba(191, 192, 192, 0.1);
     }
 
-    iframe {
-      width: 100%;
-      height: 80vh;
-      border: none;
+    /* Resume Styles - Markdown Style */
+    .resume-container {
+      background: #ffffff;
+      color: #2d3142;
+      padding: 3rem;
+      max-width: 850px;
+      margin: 0 auto;
+      line-height: 1.6;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
       border-radius: 8px;
+      border: 1px solid rgba(0, 0, 0, 0.05);
+    }
+
+    .resume-header {
+      margin-bottom: 2.5rem;
+      padding-bottom: 1.5rem;
+      border-bottom: 2px solid #e1e5e9;
+    }
+
+    .resume-header h1 {
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: #2d3142;
+      margin-bottom: 0.5rem;
+      letter-spacing: -0.02em;
+    }
+
+    .contact-info {
+      display: flex;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+      font-size: 0.95rem;
+      color: #6c757d;
+      margin-top: 0.5rem;
+    }
+
+    .contact-info a {
+      color: #0066cc;
+      text-decoration: none;
+    }
+
+    .contact-info a:hover {
+      text-decoration: underline;
+    }
+
+    .resume-section {
+      margin-bottom: 2.5rem;
+    }
+
+    .resume-section h2 {
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: #2d3142;
+      margin-bottom: 1rem;
+      padding-bottom: 0.25rem;
+      border-bottom: 1px solid #e1e5e9;
+    }
+
+    .resume-section p {
+      color: #495057;
+      margin-bottom: 1rem;
+      line-height: 1.7;
+      text-align: left;
+    }
+
+    .job {
+      margin-bottom: 2rem;
+      padding-bottom: 1.5rem;
+      border-bottom: 1px solid #f1f3f4;
+    }
+
+    .job:last-child {
+      border-bottom: none;
+    }
+
+    .job-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 0.75rem;
+    }
+
+    .job-header h3 {
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: #2d3142;
+      margin: 0;
+    }
+
+    .location {
+      color: #6c757d;
+      font-size: 0.9rem;
+      font-style: italic;
+    }
+
+    .position {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 0.5rem;
+    }
+
+    .position h4 {
+      font-size: 1.1rem;
+      font-weight: 500;
+      color: #495057;
+      margin: 0;
+    }
+
+    .dates {
+      color: #6c757d;
+      font-size: 0.9rem;
+      font-weight: 400;
+      font-style: italic;
+    }
+
+    .achievements {
+      margin-top: 0.75rem;
+      padding-left: 1.5rem;
+      list-style-type: disc;
+      list-style-position: outside;
+    }
+
+    .achievements li {
+      color: #495057;
+      margin-bottom: 0.5rem;
+      line-height: 1.6;
+      text-align: left;
+    }
+
+    .project {
+      margin-bottom: 1.5rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid #f8f9fa;
+    }
+
+    .project:last-child {
+      border-bottom: none;
+    }
+
+    .project h4 {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: #2d3142;
+      margin-bottom: 0.5rem;
+    }
+
+    .project p {
+      margin: 0;
+      color: #495057;
+      line-height: 1.6;
+      text-align: left;
+    }
+
+    .education-group {
+      margin-bottom: 2rem;
+    }
+
+    .education-group h3 {
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: #2d3142;
+      margin-bottom: 1rem;
+      border-bottom: 1px solid #f1f3f4;
+      padding-bottom: 0.25rem;
+    }
+
+    .education-item {
+      margin-bottom: 1.5rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid #f8f9fa;
+    }
+
+    .education-item:last-child {
+      border-bottom: none;
+    }
+
+    .education-item h4 {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: #2d3142;
+      margin-bottom: 0.5rem;
+    }
+
+    .education-details {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 0.5rem;
+    }
+
+    .institution {
+      color: #495057;
+      font-weight: 500;
+    }
+
+    .education-note {
+      color: #6c757d;
+      font-size: 0.9rem;
+      margin: 0;
+      line-height: 1.5;
+    }
+
+    .certifications {
+      list-style-type: disc;
+      list-style-position: outside;
+      padding-left: 1.5rem;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 0.25rem;
+    }
+
+    .certifications li {
+      color: #495057;
+      padding: 0.25rem 0;
+      text-align: left;
+    }
+
+    .skills-group {
+      margin-bottom: 1.5rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid #f8f9fa;
+    }
+
+    .skills-group:last-child {
+      border-bottom: none;
+    }
+
+    .skills-group h4 {
+      font-size: 1rem;
+      font-weight: 600;
+      color: #2d3142;
+      margin-bottom: 0.5rem;
+    }
+
+    .skills-group p {
+      margin: 0;
+      color: #495057;
+      line-height: 1.6;
+      text-align: left;
     }
 
     footer {
@@ -322,8 +573,42 @@
         padding: 0 1.5rem;
       }
 
-      iframe {
-        height: 60vh;
+      .resume-container {
+        padding: 2rem 1.5rem;
+        margin: 1rem;
+        max-width: calc(100% - 2rem);
+      }
+
+      .resume-header h1 {
+        font-size: 2rem;
+      }
+
+      .contact-info {
+        flex-direction: column;
+        gap: 0.5rem;
+        align-items: flex-start;
+      }
+
+      .job-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.25rem;
+      }
+
+      .position {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.25rem;
+      }
+
+      .education-details {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.25rem;
+      }
+
+      .certifications {
+        grid-template-columns: 1fr;
       }
 
       header {
@@ -381,13 +666,215 @@
       <main>
         <div class="container">
           <div class="main-content">
-            <a href="https://docs.google.com/document/d/14S-wx0kJzvDG0HG_KE4-0lYkZxhDt-JFVaOmSSgXKDQ/preview" target="_blank" class="resume-link">
-              📄 Open Resume in Google Drive
-            </a>
+            <div class="resume-container">
+              <div class="resume-header">
+                <h1>Jamie A. Fairley</h1>
+              </div>
 
-            <div class="iframe-container">
-              <!-- Embedded PDF (replace FILE_ID with your Google Drive file ID) -->
-              <iframe src="https://docs.google.com/document/d/14S-wx0kJzvDG0HG_KE4-0lYkZxhDt-JFVaOmSSgXKDQ/preview"></iframe>
+              <section class="resume-section">
+                <h2>Professional Summary</h2>
+                <p>Highly experienced IT professional with a comprehensive background in infrastructure management, systems administration, network engineering, and end-user support. Proven ability to lead technical initiatives, optimize enterprise platforms, and drive operational efficiency in diverse environments, including higher education and creative agencies.</p>
+              </section>
+
+              <section class="resume-section">
+                <h2>Professional Experience</h2>
+
+                <div class="job">
+                  <div class="job-header">
+                    <h3>Arts & Letters Creative Co.</h3>
+                    <span class="location">Richmond, VA</span>
+                  </div>
+
+                  <div class="position">
+                    <h4>Senior Systems & Network Administrator</h4>
+                    <span class="dates">2025–Present</span>
+                  </div>
+                  <div class="position">
+                    <h4>IT Site Lead</h4>
+                    <span class="dates">2022–2025</span>
+                  </div>
+                  <div class="position">
+                    <h4>Infrastructure & End-User Support Engineer</h4>
+                    <span class="dates">2021–2022</span>
+                  </div>
+
+                  <ul class="achievements">
+                    <li>Directed comprehensive IT operations for 100+ staff in a hybrid macOS/Windows environment, supporting critical post-production workflows.</li>
+                    <li>Oversaw daily onsite technical operations across two office locations.</li>
+                    <li>Designed, implemented, and administered secure and high-performance network infrastructure across two office locations for media production.</li>
+                    <li>Implemented Digital Asset Management (DAM) solutions, streamlining media ingest, storage, retrieval, and archiving.</li>
+                    <li>Deployed and maintained MDM solutions (Jamf, Intune) and advanced endpoint protection tools, contributing to cybersecurity efforts.</li>
+                    <li>Spearheaded development of robust post-production pipelines, including DaVinci Resolve Studio, Adobe Creative Cloud integrations, and automated ingest/output handling.</li>
+                    <li>Developed and standardized IT policies, including SOPs, disaster recovery plans, knowledge base documentation, and asset lifecycle management.</li>
+                    <li>Architected and maintained virtualization and containerization environments using Proxmox VE and Docker, enabling scalable internal tooling, isolated testing environments, and self-hosted services.</li>
+                    <li>Led advanced administration of Google Workspace for identity and access management, implementing SSO, MFA, and least-privilege access models across creative and administrative departments.</li>
+                    <li>Directed HRIT functions, overseeing IT onboarding/offboarding and managing database administration/system integrations within HRMS and recruitment tools.</li>
+                    <li>Managed a hybrid infrastructure of dedicated media servers, shared storage (NAS/SAN), and a cloud-based render farm, ensuring high availability and low-latency performance for creative teams.</li>
+                    <li>Administered and optimized AV systems for hybrid conference room setups and successfully coordinated 200+ person events.</li>
+                    <li>Oversaw security camera infrastructure and door access control systems, including badge-based access, remote monitoring, and vendor coordination for secure physical operations.</li>
+                    <li>Built and customized complex workflow automations as the lead Monday.com and Slack administrator, improving team efficiency.</li>
+                    <li>Enabled high-performance remote editing by integrating LucidLink for real-time cloud file access and Google Cloud Platform (GCP) for offloaded rendering and proxy generation.</li>
+                    <li>Pioneered the integration of AI tools (ChatGPT, Claude, Copilot, Runway, MidJourney) across design, production, and operations to automate repetitive tasks, accelerate creative development, and generate visual and written assets.</li>
+                    <li>Managed high-volume and high-quality printing operations, including large-format printing for advertising campaigns.</li>
+                  </ul>
+                </div>
+
+                <div class="job">
+                  <div class="job-header">
+                    <h3>University of Richmond</h3>
+                    <span class="location">Richmond, VA</span>
+                  </div>
+
+                  <div class="position">
+                    <h4>Academic Computing Specialist</h4>
+                    <span class="dates">2019–2021</span>
+                  </div>
+
+                  <ul class="achievements">
+                    <li>Administered and supported over 600 devices (Macs, Windows PCs, iPads) and oversaw 10 computer labs, 30 classrooms, and 50+ printers.</li>
+                    <li>Managed Jamf Pro and Microsoft Configuration Manager for efficient deployment and patching.</li>
+                    <li>Maintained core infrastructure, including campus servers, virtualization environments, LMS (Blackboard), and digital signage.</li>
+                    <li>Directed Adobe Creative Cloud deployment and licensing for institutional users.</li>
+                    <li>Led initiatives in automation, imaging, and software packaging, streamlining IT workflows.</li>
+                    <li>Implemented TeamDynamix for ticketing, change management, and asset tracking, and authored comprehensive technical documentation.</li>
+                    <li>Developed scripts and tools using PowerShell, Python, HTML, and C for various IT needs.</li>
+                  </ul>
+
+                  <div class="position">
+                    <h4>Technical Support Analyst / Consultant</h4>
+                    <span class="dates">2016–2019</span>
+                  </div>
+
+                  <ul class="achievements">
+                    <li>Provided multi-platform technical support across macOS, Windows, Linux, and mobile devices.</li>
+                    <li>Supported 5000 Students, Faculty, and Staff with both in-person and phone support.</li>
+                    <li>Managed Chromebook loan program and comprehensive asset tracking.</li>
+                    <li>Trained and supervised a team of student support workers.</li>
+                    <li>Contributed to the initial Sassafras deployment and license compliance strategy.</li>
+                  </ul>
+                </div>
+              </section>
+
+              <section class="resume-section">
+                <h2>Key Projects & Initiatives</h2>
+
+                <div class="project">
+                  <h4>Development of Automated IT Onboarding and Offboarding System</h4>
+                  <p>Spearheaded the design and implementation of automated IT onboarding and offboarding processes using BetterCloud and custom scripting, reducing manual effort and increasing consistency in user provisioning. Integrated MDM, HRMS, and Google Workspace platforms to ensure secure, compliant, and efficient user lifecycle management.</p>
+                </div>
+
+                <div class="project">
+                  <h4>Optimization of Render Farm Resource Allocation</h4>
+                  <p>Developed monitoring solutions and automation scripts to optimize cloud render farm utilization, achieving measurable reductions in rendering costs and improving delivery timelines for creative projects.</p>
+                </div>
+
+                <div class="project">
+                  <h4>Multi-Office Network Infrastructure Upgrade</h4>
+                  <p>Designed and executed a comprehensive network infrastructure upgrade across two office locations, enhancing performance, security, and reliability to support growing business and creative operations. Implemented advanced firewall policies, VPN solutions, and VLAN segmentation to ensure seamless hybrid work capabilities and data protection.</p>
+                </div>
+
+                <div class="project">
+                  <h4>Monday.com Implementation for Project and Workflow Management</h4>
+                  <p>Led the deployment of Monday.com as a centralized project management platform, creating custom workflows, dashboards, and automations to improve cross-team visibility and operational efficiency. Achieved official Monday.com certification to drive further adoption and governance.</p>
+                </div>
+
+                <div class="project">
+                  <h4>Implementation of Cloud-Based Digital Asset Management (DAM) System</h4>
+                  <p>Led the restructuring and optimization of media management systems across Google Drive and iconik, including the physical archiving of legacy assets to ensure organized, scalable storage. Designed and implemented a comprehensive metadata taxonomy and automated ingest workflows, significantly enhancing asset discoverability and accelerating post-production and marketing processes.</p>
+                </div>
+
+                <div class="project">
+                  <h4>Remote Learning Infrastructure During the Pandemic</h4>
+                  <p>Played a fundamental role in establishing remote learning capabilities during the COVID-19 pandemic by managing virtual machines and remote desktop solutions to ensure uninterrupted access to institutional resources. Managed and maintained secure access to key servers, academic software, and licensing systems, enabling a smooth transition to online learning and supporting remote faculty and students.</p>
+                </div>
+              </section>
+
+              <section class="resume-section">
+                <h2>Education & Certifications</h2>
+
+                <div class="education-group">
+                  <h3>Education</h3>
+                  <div class="education-item">
+                    <h4>BEng, Engineering with Management</h4>
+                    <div class="education-details">
+                      <span class="institution">Edinburgh Napier University – Edinburgh, Scotland</span>
+                      <span class="dates">2012–2015</span>
+                    </div>
+                    <p class="education-note">Relevant Coursework: Electrical & Mechanical Principles, Intercultural Management, Computer Systems<br>
+                    Completed 240 Credits towards Degree</p>
+                  </div>
+
+                  <div class="education-item">
+                    <h4>Sixth Form ICT Coursework</h4>
+                    <div class="education-details">
+                      <span class="institution">Whitley Bay High School – Whitley Bay, UK</span>
+                      <span class="dates">2006–2012</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="education-group">
+                  <h3>Certifications & Training</h3>
+                  <ul class="certifications">
+                    <li>Apple Certified Mac Technician (SVC-17A & MAC-17A)</li>
+                    <li>Jamf 100 Certification</li>
+                    <li>MacBook Pro Service Certification</li>
+                    <li>Monday.com Admin Certificate (2023)</li>
+                    <li>Introduction to Cyber Security – Open University</li>
+                    <li>Automate the Boring Stuff with Python – Udemy</li>
+                    <li>Python Fundamentals – Codecademy</li>
+                  </ul>
+                </div>
+              </section>
+
+              <section class="resume-section">
+                <h2>Technical Skills</h2>
+
+                <div class="skills-group">
+                  <h4>Operating Systems & Endpoint Management:</h4>
+                  <p>Proficient in administering and managing diverse environments including macOS, Windows, and Linux, utilizing leading MDM and endpoint management platforms such as Jamf Pro, Microsoft Intune, SCCM, Kandji, Addigy, and Sassafras.</p>
+                </div>
+
+                <div class="skills-group">
+                  <h4>Network Engineering & Security:</h4>
+                  <p>Expertise in designing, configuring, and maintaining network infrastructure (Meraki, Ubiquiti, Cisco Catalyst), including VLAN segmentation, DHCP/DNS, VPN solutions, and robust endpoint protection (Malwarebytes), contributing to SOC 2 readiness.</p>
+                </div>
+
+                <div class="skills-group">
+                  <h4>Scripting & Automation:</h4>
+                  <p>Strong capabilities in developing and deploying scripts for automation and system management using PowerShell, Python, Bash, HTML, and AppleScript, leveraging tools like Automator, Rclone, and GitHub Copilot.</p>
+                </div>
+
+                <div class="skills-group">
+                  <h4>Infrastructure & Virtualization:</h4>
+                  <p>Experienced with server management, Proxmox virtualization, SNMP Monitoring, and Digital Signage Systems, optimizing Media Servers and Cloud Render Farms. Familiar with network analysis tools like FFmpeg, Masscan, Nmap, Wireshark, and TShark.</p>
+                </div>
+
+                <div class="skills-group">
+                  <h4>Deployment & Imaging:</h4>
+                  <p>Highly skilled in developing and managing software packages and system images for large-scale enterprise deployments using Jamf Composer, Microsoft Configuration Manager (SCCM), Intune, and various Self-Service platforms.</p>
+                </div>
+
+                <div class="skills-group">
+                  <h4>IT Service Management (ITSM) & Asset Management:</h4>
+                  <p>Proficient in leveraging and optimizing ITSM platforms (TeamDynamix, Monday.com Service) for ticketing, change management, and asset tracking, including Employee Asset Lifecycle Management and HRIT support.</p>
+                </div>
+
+                <div class="skills-group">
+                  <h4>AV & Media Support:</h4>
+                  <p>Comprehensive experience supporting Adobe Creative Cloud, media encoding, and implementing Digital Asset Management (DAM) systems for Post-Production Workflows, plus building conference rooms and leading large-scale events.</p>
+                </div>
+
+                <div class="skills-group">
+                  <h4>Project Management & Collaboration:</h4>
+                  <p>Proven ability to lead cross-functional projects, utilizing Monday.com (Admin Certified) for project tracking and workflow automation, and developing SOPs and technical documentation.</p>
+                </div>
+
+                <div class="skills-group">
+                  <h4>AI & Emerging Technologies:</h4>
+                  <p>Actively drives innovation by leveraging advanced AI tools (ChatGPT, Claude, MidJourney, RunwayML, GitHub Copilot), specializing in prompt engineering for media enhancement, productivity, and creative solutions.</p>
+                </div>
+              </section>
             </div>
           </div>
         </div>
@@ -406,22 +893,30 @@
         <span class="text">Navigation</span>
       </div>
       <div class="nav-content">
-        <a href="index.html">
-          <span class="icon">🏠</span>
-          <span class="text">Home</span>
-        </a>
-        <a href="resume.html" class="active">
-          <span class="icon">📄</span>
-          <span class="text">Resume</span>
-        </a>
-        <a href="https://a22c9-service-17580839-d99cf792.us.monday.app/board-view.html" target="_blank">
-          <span class="icon">📋</span>
-          <span class="text">Board Mates</span>
-        </a>
-        <a href="prettier.html">
-          <span class="icon">🎨</span>
-          <span class="text">Code Prettier</span>
-        </a>
+        <div class="nav-main">
+          <a href="index.html">
+            <span class="icon">🏠</span>
+            <span class="text">Home</span>
+          </a>
+          <a href="resume.html" class="active">
+            <span class="icon">📄</span>
+            <span class="text">Resume</span>
+          </a>
+          <a href="https://a22c9-service-17580839-d99cf792.us.monday.app/board-view.html" target="_blank">
+            <span class="icon">⚓</span>
+            <span class="text">Board Mates</span>
+          </a>
+          <a href="prettier.html">
+            <span class="icon">🎨</span>
+            <span class="text">Code Prettier</span>
+          </a>
+        </div>
+        <div class="nav-bottom">
+          <a href="contact.html">
+            <span class="icon">✈️</span>
+            <span class="text">Contact</span>
+          </a>
+        </div>
       </div>
     </nav>
   </div>
