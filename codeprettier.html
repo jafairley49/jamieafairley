@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Code Prettier → Image</title>
+  <!-- Highlight.js core + default theme (we'll switch themes dynamically) -->
+  <link id="hljs-theme" rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@11.9.0/styles/github.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/highlight.js@11.9.0/lib/common.min.js"></script>
+  <!-- html2canvas for DOM → PNG export -->
+  <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+  <style>
+    :root {
+      --bg: #0b0f14;
+      --panel: #0f1722;
+      --text: #e6edf6;
+      --muted: #9fb0c0;
+      --brand: #6aa3ff;
+      --radius: 16px;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0; padding: 24px;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+      color: var(--text);
+      background: radial-gradient(1200px 800px at 10% 0%, #111a27 0%, #0b0f14 60%);
+    }
+    .app { max-width: 1100px; margin: 0 auto; display: grid; gap: 18px; }
+    h1 { font-size: 20px; margin: 0; letter-spacing: 0.2px; }
+    .bar { display:flex; align-items:center; justify-content:space-between; gap:12px; }
+
+    .panel { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: var(--radius); }
+    .controls { display:grid; grid-template-columns: repeat(6, minmax(0,1fr)); gap: 12px; padding: 14px; }
+    .control { display:flex; flex-direction: column; gap: 6px; font-size: 12px; color: var(--muted); }
+    select, input[type="text"], input[type="number"], textarea, button, label.toggle {
+      width: 100%;
+      border-radius: 10px;
+      border: 1px solid rgba(255,255,255,0.12);
+      background: rgba(255,255,255,0.04);
+      color: var(--text);
+      padding: 10px 12px; font-size: 14px;
+    }
+    textarea { min-height: 180px; font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; }
+
+    .actions { display:flex; gap: 10px; padding: 14px; }
+    .btn {
+      background: linear-gradient(180deg, #2a7dff, #1462f6);
+      border: none; color: white; padding: 10px 14px; border-radius: 12px; font-weight: 600; cursor: pointer;
+      box-shadow: 0 6px 20px rgba(54, 122, 255, 0.35);
+    }
+    .btn.secondary { background: rgba(255,255,255,0.06); box-shadow: none; }
+    .btn:disabled { opacity: 0.6; cursor: not-allowed; }
+
+    /* Shot area (what becomes the image) */
+    .shot-wrap { display:flex; justify-content:center; padding: 10px; }
+    .shot {
+      width: 100%; max-width: 1000px; 
+      border-radius: calc(var(--radius) + 4px);
+      overflow: hidden; position: relative;
+      background: #0b0f14;
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+    .titlebar {
+      display:flex; align-items:center; gap:8px; padding: 10px 12px; font-size: 13px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02));
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+    .dots { display:flex; gap:8px; margin-right: 8px; }
+    .dot { width: 12px; height: 12px; border-radius: 999px; }
+    .red{background:#ff5f57}.amber{background:#febc2e}.green{background:#28c840}
+    .filename { color: var(--muted); border: none; background: transparent; font-size: 13px; flex: 1; outline: none; }
+    .code-wrap { position: relative; }
+    .code-card {
+      margin: 14px; border-radius: var(--radius);
+      padding: 22px; overflow: auto; max-height: 640px; 
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.06);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.04);
+      backdrop-filter: blur(6px);
+    }
+    pre { margin: 0; white-space: pre; }
+    pre.wrap { white-space: pre-wrap; word-break: break-word; }
+    code { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; font-size: var(--code-size, 14px); line-height: 1.5; }
+
+    .watermark { position:absolute; bottom: 10px; right: 12px; font-size: 11px; color: rgba(255,255,255,0.45); }
+
+    /* Tiny helper text */
+    .hint { color: var(--muted); font-size: 12px; padding: 0 4px 12px; }
+    @media (max-width: 840px) { .controls { grid-template-columns: 1fr 1fr; } }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <div class="bar">
+      <h1>Code Prettier → Image</h1>
+      <div class="hint">Paste code → choose style → Download PNG</div>
+    </div>
+
+    <div class="panel">
+      <div class="controls">
+        <div class="control">
+          <label>Language (or Auto)</label>
+          <select id="language">
+            <option value="auto" selected>Auto-detect</option>
+            <option value="plaintext">Plain Text</option>
+            <option value="javascript">JavaScript</option>
+            <option value="typescript">TypeScript</option>
+            <option value="python">Python</option>
+            <option value="json">JSON</option>
+            <option value="bash">Bash</option>
+            <option value="markdown">Markdown</option>
+            <option value="html">HTML</option>
+            <option value="css">CSS</option>
+            <option value="xml">XML</option>
+            <option value="java">Java</option>
+            <option value="c">C</option>
+            <option value="cpp">C++</option>
+            <option value="go">Go</option>
+            <option value="ruby">Ruby</option>
+            <option value="php">PHP</option>
+            <option value="swift">Swift</option>
+            <option value="kotlin">Kotlin</option>
+            <option value="yaml">YAML</option>
+          </select>
+        </div>
+        <div class="control">
+          <label>Theme</label>
+          <select id="theme">
+            <option value="github">GitHub (light)</option>
+            <option value="github-dark">GitHub Dark</option>
+            <option value="atom-one-light">Atom One Light</option>
+            <option value="atom-one-dark">Atom One Dark</option>
+            <option value="stackoverflow-light">StackOverflow Light</option>
+            <option value="stackoverflow-dark">StackOverflow Dark</option>
+            <option value="monokai">Monokai</option>
+            <option value="tokyo-night-dark" selected>Tokyo Night Dark</option>
+            <option value="night-owl">Night Owl</option>
+            <option value="xcode">Xcode (light)</option>
+          </select>
+        </div>
+        <div class="control">
+          <label>Font size (px)</label>
+          <input id="fontSize" type="number" value="14" min="10" max="28" />
+        </div>
+        <div class="control">
+          <label>Padding (px)</label>
+          <input id="padding" type="number" value="22" min="8" max="64" />
+        </div>
+        <div class="control">
+          <label>Wrap lines</label>
+          <select id="wrap">
+            <option value="off" selected>No</option>
+            <option value="on">Yes</option>
+          </select>
+        </div>
+        <div class="control">
+          <label>Filename label</label>
+          <input id="filename" type="text" placeholder="example.js" />
+        </div>
+      </div>
+      <div class="actions">
+        <button class="btn" id="renderBtn">Render Preview</button>
+        <button class="btn secondary" id="downloadBtn" disabled>Download PNG</button>
+        <label class="toggle" style="display:flex; align-items:center; gap:8px; width:auto;">
+          <input id="wm" type="checkbox" checked /> Show watermark
+        </label>
+      </div>
+    </div>
+
+    <div class="panel" style="padding:14px;">
+      <label class="control" style="gap:8px;">
+        <span>Paste your code here</span>
+        <textarea id="source" spellcheck="false" placeholder="Paste code…"></textarea>
+      </label>
+    </div>
+
+    <!-- What becomes the image -->
+    <div class="panel shot-wrap">
+      <div id="shot" class="shot">
+        <div class="titlebar">
+          <div class="dots"><div class="dot red"></div><div class="dot amber"></div><div class="dot green"></div></div>
+          <input class="filename" id="displayName" placeholder="Untitled" />
+        </div>
+        <div class="code-wrap">
+          <div id="codeCard" class="code-card">
+            <pre id="pre" class="hljs"><code id="code" class="language-plaintext"></code></pre>
+          </div>
+          <div id="mark" class="watermark">Made with Code Prettier</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const $ = (s) => document.querySelector(s);
+    const source = $('#source');
+    const language = $('#language');
+    const themeSel = $('#theme');
+    const fontSize = $('#fontSize');
+    const padding = $('#padding');
+    const wrap = $('#wrap');
+    const filename = $('#filename');
+    const displayName = $('#displayName');
+    const wm = $('#wm');
+    const pre = $('#pre');
+    const code = $('#code');
+    const codeCard = $('#codeCard');
+    const mark = $('#mark');
+    const renderBtn = $('#renderBtn');
+    const dlBtn = $('#downloadBtn');
+
+    const themeHref = {
+      'github': 'https://cdn.jsdelivr.net/npm/highlight.js@11.9.0/styles/github.min.css',
+      'github-dark': 'https://cdn.jsdelivr.net/npm/highlight.js@11.9.0/styles/github-dark.min.css',
+      'atom-one-light': 'https://cdn.jsdelivr.net/npm/highlight.js@11.9.0/styles/atom-one-light.min.css',
+      'atom-one-dark': 'https://cdn.jsdelivr.net/npm/highlight.js@11.9.0/styles/atom-one-dark.min.css',
+      'stackoverflow-light': 'https://cdn.jsdelivr.net/npm/highlight.js@11.9.0/styles/stackoverflow-light.min.css',
+      'stackoverflow-dark': 'https://cdn.jsdelivr.net/npm/highlight.js@11.9.0/styles/stackoverflow-dark.min.css',
+      'monokai': 'https://cdn.jsdelivr.net/npm/highlight.js@11.9.0/styles/monokai.min.css',
+      'night-owl': 'https://cdn.jsdelivr.net/npm/highlight.js@11.9.0/styles/night-owl.min.css',
+      'xcode': 'https://cdn.jsdelivr.net/npm/highlight.js@11.9.0/styles/xcode.min.css',
+      'tokyo-night-dark': 'https://cdn.jsdelivr.net/npm/highlight.js@11.9.0/styles/tokyo-night-dark.min.css',
+    };
+
+    function applyTheme() {
+      const link = document.getElementById('hljs-theme');
+      link.href = themeHref[themeSel.value] || themeHref['github'];
+    }
+
+    function render() {
+      // Apply options
+      pre.style.setProperty('--code-size', fontSize.value + 'px');
+      codeCard.style.padding = padding.value + 'px';
+      pre.classList.toggle('wrap', wrap.value === 'on');
+      displayName.value = filename.value || displayName.value;
+      mark.style.display = wm.checked ? 'block' : 'none';
+      applyTheme();
+
+      // Set code & highlight
+      const text = source.value || '';
+      code.textContent = text; // ensure no HTML is interpreted
+      const lang = language.value;
+
+      // Reset classes for hljs
+      code.className = '';
+      pre.className = 'hljs' + (wrap.value === 'on' ? ' wrap' : '');
+
+      if (lang === 'auto') {
+        // Auto-detect
+        const res = hljs.highlightAuto(text);
+        code.innerHTML = res.value;
+      } else if (lang === 'plaintext') {
+        code.textContent = text;
+      } else {
+        code.classList.add('language-' + lang);
+        hljs.highlightElement(code);
+      }
+
+      // Enable download when there's content
+      dlBtn.disabled = text.trim().length === 0;
+    }
+
+    async function download() {
+      dlBtn.disabled = true;
+      dlBtn.textContent = 'Rendering…';
+      const node = document.getElementById('shot');
+      // Scale up for sharper PNGs
+      const canvas = await html2canvas(node, { scale: 2, backgroundColor: null, useCORS: true });
+      canvas.toBlob((blob) => {
+        const a = document.createElement('a');
+        a.href = URL.createObjectURL(blob);
+        const name = (filename.value || 'code') + '.png';
+        a.download = name;
+        document.body.appendChild(a);
+        a.click();
+        URL.revokeObjectURL(a.href);
+        a.remove();
+        dlBtn.textContent = 'Download PNG';
+        dlBtn.disabled = false;
+      });
+    }
+
+    // Wire up
+    renderBtn.addEventListener('click', render);
+    [source, language, themeSel, fontSize, padding, wrap, filename, wm].forEach(el => {
+      el.addEventListener('input', () => {
+        // live-update preview as you type
+        render();
+      });
+    });
+
+    dlBtn.addEventListener('click', download);
+
+    // Initial
+    applyTheme();
+    render();
+  </script>
+</body>
+</html>

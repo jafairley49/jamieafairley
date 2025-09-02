@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Resume</title>
+  <style>
+    body {
+      font-family: system-ui, sans-serif;
+      margin: 0;
+      padding: 2rem;
+      background: #fafafa;
+      color: #222;
+      text-align: center;
+    }
+    nav {
+      margin-bottom: 2rem;
+    }
+    nav a {
+      margin: 0 1rem;
+      text-decoration: none;
+      color: #0077cc;
+    }
+    nav a:hover {
+      text-decoration: underline;
+    }
+    iframe {
+      width: 100%;
+      height: 90vh;
+      border: none;
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="prettier.html">Code Prettier</a>
+    <a href="resume.html">Resume</a>
+  </nav>
+
+  <h1>My Resume</h1>
+  <p><a href="https://drive.google.com/file/d/FILE_ID/view?usp=sharing" target="_blank">Open Resume in Google Drive</a></p>
+
+  <!-- Embedded PDF (replace FILE_ID with your Google Drive file ID) -->
+  <iframe src="https://drive.google.com/file/d/FILE_ID/preview"></iframe>
+</body>
+</html>
